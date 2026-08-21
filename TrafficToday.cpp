@@ -28,7 +28,7 @@ static constexpr UINT TIMER_INTERVAL = 1000;
 
 // Compact window size
 static constexpr int WINDOW_WIDTH = 280;
-static constexpr int WINDOW_HEIGHT = 150;
+static constexpr int WINDOW_HEIGHT = 125;
 
 static const wchar_t WINDOW_CLASS[] =
     L"TrafficTodayWindowClass";
