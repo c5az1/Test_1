@@ -1,0 +1,29 @@
+name: Build TrafficToday DLL
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add MSVC to PATH
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Compile DLL
+        shell: cmd
+        run: |
+          cl /nologo /LD /EHsc TrafficToday.cpp ^
+            /link user32.lib gdi32.lib ^
+            /OUT:TrafficToday.dll
+
+      - name: Upload DLL Result
+        uses: actions/upload-artifact@v4
+        with:
+          name: TrafficToday-Plugin
+          path: TrafficToday.dll
