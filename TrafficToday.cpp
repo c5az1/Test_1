@@ -28,7 +28,7 @@ static constexpr UINT TIMER_INTERVAL = 1000;
 
 // Compact window size
 static constexpr int WINDOW_WIDTH = 280;
-static constexpr int WINDOW_HEIGHT = 125;
+static constexpr int WINDOW_HEIGHT = 150;
 
 static const wchar_t WINDOW_CLASS[] =
     L"TrafficTodayWindowClass";
@@ -836,7 +836,7 @@ static void PaintTrafficWindow(
         separatorPen);
 
     // --------------------------------------------------------
-    // Upload & Download (side by side, same row)
+    // Upload
     // --------------------------------------------------------
 
     SelectObject(
@@ -852,14 +852,10 @@ static void PaintTrafficWindow(
         FormatBytesDecimal(
             g_todayUpload);
 
-    int midX =
-        client.left +
-        ((client.right - client.left) / 2);
-
     RECT uploadRect{
         Scale(14),
         Scale(52),
-        midX,
+        client.right - Scale(14),
         Scale(76)
     };
 
@@ -870,8 +866,11 @@ static void PaintTrafficWindow(
         &uploadRect,
         DT_LEFT |
         DT_SINGLELINE |
-        DT_VCENTER |
-        DT_END_ELLIPSIS);
+        DT_VCENTER);
+
+    // --------------------------------------------------------
+    // Download
+    // --------------------------------------------------------
 
     std::wstring downloadText =
         L"Download: " +
@@ -879,10 +878,10 @@ static void PaintTrafficWindow(
             g_todayDownload);
 
     RECT downloadRect{
-        midX,
-        Scale(52),
+        Scale(14),
+        Scale(78),
         client.right - Scale(14),
-        Scale(76)
+        Scale(102)
     };
 
     DrawTextW(
@@ -892,8 +891,7 @@ static void PaintTrafficWindow(
         &downloadRect,
         DT_LEFT |
         DT_SINGLELINE |
-        DT_VCENTER |
-        DT_END_ELLIPSIS);
+        DT_VCENTER);
 
     // --------------------------------------------------------
     // Cleanup
