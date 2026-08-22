@@ -845,6 +845,26 @@ static void PaintTrafficWindow(
 
     SetTextColor(
         hdc,
+        RGB(220, 90, 90));
+
+    RECT uploadIconRect{
+        Scale(14),
+        Scale(50),
+        Scale(30),
+        Scale(68)
+    };
+
+    DrawTextW(
+        hdc,
+        L"\u25B2",
+        -1,
+        &uploadIconRect,
+        DT_LEFT |
+        DT_SINGLELINE |
+        DT_VCENTER);
+
+    SetTextColor(
+        hdc,
         RGB(205, 205, 205));
 
     std::wstring uploadText =
@@ -853,10 +873,10 @@ static void PaintTrafficWindow(
             g_todayUpload);
 
     RECT uploadRect{
-        Scale(14),
-        Scale(52),
+        Scale(32),
+        Scale(50),
         client.right - Scale(14),
-        Scale(76)
+        Scale(68)
     };
 
     DrawTextW(
@@ -872,16 +892,40 @@ static void PaintTrafficWindow(
     // Download
     // --------------------------------------------------------
 
+    SetTextColor(
+        hdc,
+        RGB(90, 190, 110));
+
+    RECT downloadIconRect{
+        Scale(14),
+        Scale(70),
+        Scale(30),
+        Scale(88)
+    };
+
+    DrawTextW(
+        hdc,
+        L"\u25BC",
+        -1,
+        &downloadIconRect,
+        DT_LEFT |
+        DT_SINGLELINE |
+        DT_VCENTER);
+
+    SetTextColor(
+        hdc,
+        RGB(205, 205, 205));
+
     std::wstring downloadText =
         L"Download: " +
         FormatBytesDecimal(
             g_todayDownload);
 
     RECT downloadRect{
-        Scale(14),
-        Scale(78),
+        Scale(32),
+        Scale(70),
         client.right - Scale(14),
-        Scale(102)
+        Scale(88)
     };
 
     DrawTextW(
